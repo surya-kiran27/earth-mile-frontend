@@ -31,4 +31,5 @@ export async function loginUser(dispatch) {
 export async function logout(dispatch) {
   dispatch({ type: "LOGOUT" });
   localStorage.removeItem("currentUser");
+  let response = await fetch(`${ROOT_URL}/users/logout`);
 }

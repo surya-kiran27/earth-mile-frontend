@@ -4,11 +4,12 @@ import routes from "./config/routes";
 import AppRoute from "./components/AppRoute";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 import { AuthProvider } from "./Context/context";
-
+import Navbar from "./components/Navbar";
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
       <Router>
+        <Navbar></Navbar>
         <Switch>
           {routes.map((route) => (
             <AppRoute
