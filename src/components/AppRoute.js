@@ -2,7 +2,7 @@ import React from "react";
 import { Redirect, Route } from "react-router-dom";
 
 import { useAuthState } from "../Context";
-
+import "../css/CreatePost.css";
 const AppRoutes = ({ component: Component, path, isPrivate, ...rest }) => {
   const state = useAuthState();
   console.log(state);

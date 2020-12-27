@@ -2,6 +2,7 @@ import React from "react";
 import Login from "../components/Login";
 import Home from "../components/Home";
 import EarthMileMap from "../components/EarthMileMap";
+import CreatePost from "../components/CreatePost";
 const routes = [
   {
     path: "/login",
@@ -11,7 +12,12 @@ const routes = [
   {
     path: "/earthMileMap",
     component: EarthMileMap,
-    isPrivate: false,
+    isPrivate: true,
+  },
+  {
+    path: "/createPost",
+    component: CreatePost,
+    isPrivate: true,
   },
   {
     path: "/",

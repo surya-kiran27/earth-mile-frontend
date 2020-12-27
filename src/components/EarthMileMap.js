@@ -9,6 +9,7 @@ import {
   Tooltip,
   Marker,
   MapConsumer,
+  Popup,
 } from "react-leaflet";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
@@ -23,6 +24,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 import TextField from "@material-ui/core/TextField";
+import { useHistory } from "react-router-dom";
 
 let DefaultIcon = L.icon({
   iconUrl: icon,
@@ -40,12 +42,13 @@ export default function EarthMileMap(props) {
   const [open, setOpen] = React.useState(false);
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
-
+  const [redirect, setRedirect] = useState({ redirect: false, state: null });
   const [err, setErr] = useState("");
   const fillRed = { fillColor: "red" };
   const fillBlue = { fillColor: "blue" };
   const fillGreen = { fillColor: "green" };
   const circleRef = useRef(null);
+  let history = useHistory();
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -124,7 +127,7 @@ export default function EarthMileMap(props) {
                     pathOptions={fillBlue}
                     radius={1609}
                   >
-                    <Tooltip>
+                    <Popup>
                       <Container>
                         <center>
                           <Typography
@@ -140,7 +143,7 @@ export default function EarthMileMap(props) {
                             display="block"
                             gutterBottom
                           >
-                            Posts: <b>{earthMile.posts.length}</b>
+                            Posts: <b>{earthMile.No_Posts}</b>
                           </Typography>
                           <br />
                           <Typography
@@ -161,15 +164,20 @@ export default function EarthMileMap(props) {
                             variant="contained"
                             color="primary"
                             onClick={() => {
-                              window.location.href =
-                                "http://localhost:8000/users/login/google";
+                              console.log("cliecked", earthMile._id);
+                              history.push({
+                                pathname: "/",
+                                state: {
+                                  earth_mile_id: earthMile._id,
+                                },
+                              });
                             }}
                           >
                             View
                           </Button>
                         </center>
                       </Container>
-                    </Tooltip>
+                    </Popup>
                   </Circle>
                 );
               })}
